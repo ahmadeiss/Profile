@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed's Interactive Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: url('castle-background.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        .door {
+            width: 100px;
+            height: 200px;
+            position: absolute;
+            cursor: pointer;
+        }
+        #door1 { left: 20%; top: 50%; transform: translate(-50%, -50%); }
+        #door2 { left: 50%; top: 50%; transform: translate(-50%, -50%); }
+        #door3 { left: 80%; top: 50%; transform: translate(-50%, -50%); }
+        .character {
+            width: 50px;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="character.png" class="character" alt="Character">
+        <img src="door.png" id="door1" class="door" alt="Door 1" onclick="location.href='#about'">
+        <img src="door.png" id="door2" class="door" alt="Door 2" onclick="location.href='#skills'">
+        <img src="door.png" id="door3" class="door" alt="Door 3" onclick="location.href='#projects'">
+    </div>
+    <div id="about">
+        <h2>About Me</h2>
+        <p>This is where you describe yourself.</p>
+    </div>
+    <div id="skills">
+        <h2>My Skills</h2>
+        <p>This is where you list your skills.</p>
+    </div>
+    <div id="projects">
+        <h2>My Projects</h2>
+        <p>This is where you showcase your projects.</p>
+    </div>
+</body>
+</html>
