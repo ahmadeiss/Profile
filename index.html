@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed's Interactive Profile</title>
+    <title>Interactive Profile Game</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             height: 100vh;
             overflow: hidden;
-            background-color: #f0f0f0;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('castle-background.jpg') no-repeat center center;
-            background-size: cover;
+            color: #ecf0f1;
         }
 
         .container {
@@ -24,8 +23,8 @@
             width: 800px;
             height: 400px;
             border: 2px solid #000;
-            overflow: hidden;
             background-color: #fff;
+            overflow: hidden;
         }
 
         .character {
@@ -33,6 +32,7 @@
             position: absolute;
             bottom: 10px;
             left: 10px;
+            z-index: 10; /* Ensures the character is in front of doors */
             transition: left 0.1s, top 0.1s;
         }
 
@@ -41,6 +41,7 @@
             height: 200px;
             position: absolute;
             bottom: 0;
+            z-index: 5; /* Doors are behind the character */
             cursor: pointer;
             transition: transform 0.5s ease-in-out;
         }
@@ -56,7 +57,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="prof.png" class="character" id="character" alt="Character">
+        <img src="character.png" class="character" id="character" alt="Character">
         <img src="door.png" id="door1" class="door" alt="Door 1">
         <img src="door.png" id="door2" class="door" alt="Door 2">
         <img src="door.png" id="door3" class="door" alt="Door 3">
@@ -92,10 +93,16 @@
 
             // Check if character is near a door
             doors.forEach(door => {
-                const doorLeft = door.getBoundingClientRect().left - character.getBoundingClientRect().width / 2;
-                const doorRight = doorLeft + door.offsetWidth;
+                const doorRect = door.getBoundingClientRect();
+                const characterRect = character.getBoundingClientRect();
 
-                if (posX >= doorLeft && posX <= doorRight && Math.abs(posY - 200) < 20) {
+                // Simple collision detection
+                if (
+                    characterRect.left < doorRect.right &&
+                    characterRect.right > doorRect.left &&
+                    characterRect.top < doorRect.bottom &&
+                    characterRect.bottom > doorRect.top
+                ) {
                     currentDoor = door;
                 } else if (currentDoor === door) {
                     currentDoor = null; // reset if character moves away from the door
