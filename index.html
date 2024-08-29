@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Eiss</title>
+    <title>Ahmed's Interactive Profile</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,7 +33,7 @@
             position: absolute;
             bottom: 10px;
             left: 10px;
-            transition: left 0.5s ease-in-out, top 0.5s ease-in-out;
+            transition: left 0.1s, top 0.1s;
         }
 
         .door {
@@ -42,11 +42,16 @@
             position: absolute;
             bottom: 0;
             cursor: pointer;
+            transition: transform 0.5s ease-in-out;
         }
 
         #door1 { left: 200px; }
         #door2 { left: 400px; }
         #door3 { left: 600px; }
+
+        .open {
+            transform: rotateY(90deg);
+        }
     </style>
 </head>
 <body>
@@ -60,25 +65,63 @@
     <script>
         const character = document.getElementById('character');
         const doors = document.querySelectorAll('.door');
+        let currentDoor = null;
 
-        doors.forEach(door => {
-            door.addEventListener('click', () => {
-                const doorPosition = door.getBoundingClientRect().left;
-                const characterPosition = character.getBoundingClientRect().left;
+        // Initial character position
+        let posX = 10;
+        let posY = 340;
 
-                character.style.left = doorPosition + 'px';
+        // Move character based on arrow key input
+        document.addEventListener('keydown', (event) => {
+            switch (event.key) {
+                case 'ArrowLeft':
+                    if (posX > 0) posX -= 10;
+                    break;
+                case 'ArrowRight':
+                    if (posX < 750) posX += 10;
+                    break;
+                case 'ArrowUp':
+                    if (posY > 0) posY -= 10;
+                    break;
+                case 'ArrowDown':
+                    if (posY < 340) posY += 10;
+                    break;
+            }
+            character.style.left = posX + 'px';
+            character.style.top = posY + 'px';
 
-                // Adding a small delay before navigating
-                setTimeout(() => {
-                    if (door.id === 'door1') {
-                        window.location.href = 'about.html';
-                    } else if (door.id === 'door2') {
-                        window.location.href = 'skills.html';
-                    } else if (door.id === 'door3') {
-                        window.location.href = 'projects.html';
-                    }
-                }, 600);
+            // Check if character is near a door
+            doors.forEach(door => {
+                const doorLeft = door.getBoundingClientRect().left - character.getBoundingClientRect().width / 2;
+                const doorRight = doorLeft + door.offsetWidth;
+
+                if (posX >= doorLeft && posX <= doorRight && Math.abs(posY - 200) < 20) {
+                    currentDoor = door;
+                } else if (currentDoor === door) {
+                    currentDoor = null; // reset if character moves away from the door
+                }
             });
+        });
+
+        // Listen for the "E" key press to open the door
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'e' || event.key === 'E') {
+                if (currentDoor) {
+                    // Open the door
+                    currentDoor.classList.add('open');
+
+                    // Navigate to the corresponding page after a short delay
+                    setTimeout(() => {
+                        if (currentDoor.id === 'door1') {
+                            window.location.href = 'about.html';
+                        } else if (currentDoor.id === 'door2') {
+                            window.location.href = 'skills.html';
+                        } else if (currentDoor.id === 'door3') {
+                            window.location.href = 'projects.html';
+                        }
+                    }, 1000);
+                }
+            }
         });
     </script>
 </body>
