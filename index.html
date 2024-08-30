@@ -46,6 +46,19 @@
             transition: transform 0.5s ease-in-out;
         }
 
+        .door-label {
+            position: absolute;
+            top: -30px;
+            width: 100px;
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            background: #ecf0f1;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none; /* Initially hidden */
+        }
+
         #door1 { left: 200px; }
         #door2 { left: 400px; }
         #door3 { left: 600px; }
@@ -53,19 +66,27 @@
         .open {
             transform: rotateY(90deg);
         }
+
+        .help-label {
+            display: none; /* Initially hidden */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="prof.png" class="character" id="character" alt="Character">
+        <img src="prof.html" class="character" id="character" alt="Character">
         <img src="door.png" id="door1" class="door" alt="Door 1">
+        <div class="door-label" id="label1">Press E to enter</div>
         <img src="door.png" id="door2" class="door" alt="Door 2">
+        <div class="door-label" id="label2">Press E to enter</div>
         <img src="door.png" id="door3" class="door" alt="Door 3">
+        <div class="door-label" id="label3">Press E to enter</div>
     </div>
 
     <script>
         const character = document.getElementById('character');
         const doors = document.querySelectorAll('.door');
+        const labels = document.querySelectorAll('.door-label');
         let currentDoor = null;
 
         // Initial character position
@@ -92,7 +113,7 @@
             character.style.top = posY + 'px';
 
             // Check if character is near a door
-            doors.forEach(door => {
+            doors.forEach((door, index) => {
                 const doorRect = door.getBoundingClientRect();
                 const characterRect = character.getBoundingClientRect();
 
@@ -104,8 +125,10 @@
                     characterRect.bottom > doorRect.top
                 ) {
                     currentDoor = door;
+                    labels[index].style.display = 'block'; // Show help label
                 } else if (currentDoor === door) {
-                    currentDoor = null; // reset if character moves away from the door
+                    currentDoor = null; // Reset if character moves away from the door
+                    labels[index].style.display = 'none'; // Hide help label
                 }
             });
         });
