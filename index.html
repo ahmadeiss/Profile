@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Eiss</title>
+    <title>Main Page</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -63,6 +63,10 @@
         #door2 { left: 400px; }
         #door3 { left: 600px; }
 
+        .door-label[data-door="1"] { left: 200px; }
+        .door-label[data-door="2"] { left: 400px; }
+        .door-label[data-door="3"] { left: 600px; }
+
         .open {
             transform: rotateY(90deg);
         }
@@ -76,11 +80,11 @@
     <div class="container">
         <img src="prof.png" class="character" id="character" alt="Character">
         <img src="door.png" id="door1" class="door" alt="Door 1">
-        <div class="door-label" id="label1">Press E to enter</div>
+        <div class="door-label" data-door="1">Press E to enter</div>
         <img src="door.png" id="door2" class="door" alt="Door 2">
-        <div class="door-label" id="label2">Press E to enter</div>
+        <div class="door-label" data-door="2">Press E to enter</div>
         <img src="door.png" id="door3" class="door" alt="Door 3">
-        <div class="door-label" id="label3">Press E to enter</div>
+        <div class="door-label" data-door="3">Press E to enter</div>
     </div>
 
     <script>
