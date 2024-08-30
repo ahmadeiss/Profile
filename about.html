@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Ahmad</title>
+    <title>About Ahmed</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,74 +13,52 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(135deg, #2c3e50, #3498db);
-            overflow: hidden;
-            color: #ecf0f1;
+            background: #ecf0f1;
+            color: #333;
         }
 
         .container {
             text-align: center;
-            transform: perspective(1000px);
-            animation: float 6s ease-in-out infinite;
+            padding: 20px;
+            border: 2px solid #333;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .title {
             font-size: 3em;
             font-weight: bold;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-            transform: rotateY(0deg);
-            transition: transform 1s;
-            animation: rotate 5s ease-in-out infinite;
         }
 
         .subtitle {
             font-size: 1.5em;
             margin-top: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 2s ease-in-out;
         }
 
-        .title:hover {
-            transform: rotateY(360deg);
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: perspective(1000px) translateY(0);
-            }
-            50% {
-                transform: perspective(1000px) translateY(-20px);
-            }
-        }
-
-        @keyframes rotate {
-            0% {
-                transform: rotateY(0deg);
-            }
-            50% {
-                transform: rotateY(180deg);
-            }
-            100% {
-                transform: rotateY(360deg);
-            }
-        }
-
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .back-button:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="title">Ahmad | Computer Engineer</div>
+        <div class="title">Ahmed | Computer Engineer</div>
         <div class="subtitle">Innovative Computer Engineer with a strong background in software development, Programming, and Networking.</div>
+        <a href="index.html" class="back-button">Back to Main Menu</a>
     </div>
 </body>
 </html>
