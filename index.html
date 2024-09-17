@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>About Me Game</title>
+  <title>About Me</title>
   <style>
     /* CSS Styles */
 
@@ -113,17 +113,20 @@
 </head>
 <body>
 
-  <h1>Welcome to My Interactive About Me Game</h1>
+  <h1>Welcome</h1>
 
   <div class="doors-container">
     <div class="door" onclick="openDoor('certificates')">
-      <div class="door-number">1</div>
+      <div class="door-number">Certificates</div>
     </div>
     <div class="door" onclick="openDoor('age')">
-      <div class="door-number">2</div>
+      <div class="door-number">Personal Information</div>
     </div>
     <div class="door" onclick="openDoor('name')">
-      <div class="door-number">3</div>
+      <div class="door-number">Experts</div>
+    </div>
+    <div class="door" onclick="openDoor('edu')">
+      <div class="door-number">Educational</div>
     </div>
     <!-- Add more doors as needed -->
   </div>
@@ -149,17 +152,28 @@
         infoTitle.textContent = 'My Certificates';
         infoContent.innerHTML = `
           <ul>
-            <li>Certificate 1: Description</li>
-            <li>Certificate 2: Description</li>
-            <li>Certificate 3: Description</li>
+            <li>Certificate 1: Training for employee </li>
+            <li>Certificate 2: Coming Soon</li>
+            <li>Certificate 3: Coming Soon</li>
           </ul>
         `;
       } else if (section === 'age') {
         infoTitle.textContent = 'My Age';
-        infoContent.textContent = 'I am [Your Age] years old.';
+        infoContent.textContent = 'I am 22 years old.';
       } else if (section === 'name') {
         infoTitle.textContent = 'My Name';
-        infoContent.textContent = 'My name is [Your Name].';
+        infoContent.textContent = 'My name is Ahmad Eiss.';
+      }
+
+      else if (section === 'edu') {
+       infoTitle.textContent = 'My Educations';
+        infoContent.innerHTML = `
+          <ul>
+            <li> 1'st: Second School frpm Deir Debwan </li>
+            <li> 2'nd: Computer Engineering from Birzeit</li>
+            <li> 3'rd: Coming Soon</li>
+          </ul>
+        `;
       }
       // Add more sections as needed
 
