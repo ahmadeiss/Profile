@@ -6,11 +6,19 @@
   <style>
     /* CSS Styles */
 
-    body {
+    /* Reset default margins and paddings */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: Arial, sans-serif;
       background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
       text-align: center;
     }
 
@@ -22,13 +30,15 @@
     .doors-container {
       display: flex;
       justify-content: center;
+      align-items: center;
       flex-wrap: wrap;
-      margin-top: 50px;
+      flex-grow: 1;
+      margin: 50px 0;
     }
 
     .door {
-      width: 150px;
-      height: 250px;
+      width: 200px;
+      height: 350px;
       margin: 20px;
       background-color: #8B4513; /* Brown color */
       position: relative;
@@ -47,8 +57,8 @@
     .door::before {
       content: '';
       position: absolute;
-      width: 140px;
-      height: 240px;
+      width: 190px;
+      height: 340px;
       top: 5px;
       left: 5px;
       background-color: #A0522D; /* Sienna color */
@@ -60,9 +70,12 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 48px;
+      font-size: 28px;
       color: #fff;
       z-index: 1;
+      text-align: center;
+      width: 90%;
+      word-wrap: break-word;
     }
 
     #info {
@@ -109,6 +122,23 @@
       z-index: 10;
     }
 
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .door {
+        width: 150px;
+        height: 250px;
+      }
+
+      .door::before {
+        width: 140px;
+        height: 240px;
+      }
+
+      .door-number {
+        font-size: 24px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -152,26 +182,24 @@
         infoTitle.textContent = 'My Certificates';
         infoContent.innerHTML = `
           <ul>
-            <li>Certificate 1: Training for employee </li>
+            <li>Certificate 1: Training for employee</li>
             <li>Certificate 2: Coming Soon</li>
             <li>Certificate 3: Coming Soon</li>
           </ul>
         `;
       } else if (section === 'age') {
-        infoTitle.textContent = 'My Age';
+        infoTitle.textContent = 'Personal Information';
         infoContent.textContent = 'I am 22 years old.';
       } else if (section === 'name') {
-        infoTitle.textContent = 'My Name';
-        infoContent.textContent = 'My name is Ahmad Eiss.';
-      }
-
-      else if (section === 'edu') {
-       infoTitle.textContent = 'My Educations';
+        infoTitle.textContent = 'My Expertise';
+        infoContent.textContent = 'Expert in software development and networking.';
+      } else if (section === 'edu') {
+        infoTitle.textContent = 'My Education';
         infoContent.innerHTML = `
           <ul>
-            <li> 1'st: Second School frpm Deir Debwan </li>
-            <li> 2'nd: Computer Engineering from Birzeit</li>
-            <li> 3'rd: Coming Soon</li>
+            <li>1st: Secondary School from Deir Debwan</li>
+            <li>2nd: Computer Engineering from Birzeit University</li>
+            <li>3rd: Coming Soon</li>
           </ul>
         `;
       }
@@ -192,4 +220,3 @@
 
 </body>
 </html>
-
