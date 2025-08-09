@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ahmad Eiss - Software Engineer</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    
+
     * {
       margin: 0;
       padding: 0;
@@ -93,10 +93,18 @@
       animation: slideInFromBottom 0.8s ease-out;
     }
 
-    .interactive-card:nth-child(1) { animation-delay: 0.1s; }
-    .interactive-card:nth-child(2) { animation-delay: 0.2s; }
-    .interactive-card:nth-child(3) { animation-delay: 0.3s; }
-    .interactive-card:nth-child(4) { animation-delay: 0.4s; }
+    .interactive-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    .interactive-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .interactive-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    .interactive-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
 
     .interactive-card:hover {
       transform: translateY(-10px) scale(1.02);
@@ -151,7 +159,7 @@
     }
 
     .card-description {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #b0bec5;
       line-height: 1.5;
     }
@@ -290,9 +298,17 @@
 
     /* Animations */
     @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     @keyframes float {
@@ -300,12 +316,15 @@
         transform: translateY(100vh) rotate(0deg);
         opacity: 0;
       }
+
       10% {
         opacity: 1;
       }
+
       90% {
         opacity: 1;
       }
+
       100% {
         transform: translateY(-100px) rotate(360deg);
         opacity: 0;
@@ -339,12 +358,12 @@
       .hero {
         padding: 60px 20px 40px;
       }
-      
+
       .cards-container {
         grid-template-columns: 1fr;
         gap: 20px;
       }
-      
+
       .modal {
         padding: 30px 25px;
         margin: 20px;
@@ -378,7 +397,7 @@
   <!-- Hero Section -->
   <div class="hero">
     <h1 class="hero-title">Ahmad Eiss</h1>
-    <p class="hero-subtitle">Problem Solver • Java & Python Developer • Turning Challenges into Solutions</p>
+    <p class="hero-subtitle">Software Engineer • Problem Solver • Java & Python Enthusiast</p>
   </div>
 
   <!-- Interactive Cards -->
@@ -387,182 +406,166 @@
       <div class="card-overlay"></div>
       <div class="card-content">
         <div class="card-icon">🚀</div>
-        <h3 class="card-title">Technical Expertise</h3>
-        <p class="card-description">Advanced software development and networking solutions</p>
+        <h3 class="card-title">Technical Skills</h3>
+        <p class="card-description">Proficient in Java and Python with experience in web development and version control.</p>
       </div>
     </div>
-
     <div class="interactive-card" onclick="openModal('education')">
       <div class="card-overlay"></div>
       <div class="card-content">
         <div class="card-icon">🎓</div>
-        <h3 class="card-title">Education & Background</h3>
-        <p class="card-description">academic achievements</p>
+        <h3 class="card-title">Education</h3>
+        <p class="card-description">Bachelor's degree in Computer Science, focused on software engineering principles and best practices.</p>
       </div>
     </div>
-
-
-    <div class="interactive-card" onclick="openModal('profile')">
+    <div class="interactive-card" onclick="openModal('projects')">
       <div class="card-overlay"></div>
       <div class="card-content">
-        <div class="card-icon">👨‍💻</div>
-        <h3 class="card-title">Personal Informations</h3>
-        <p class="card-description">Personal information and career overview</p>
+        <div class="card-icon">💼</div>
+        <h3 class="card-title">Projects</h3>
+        <p class="card-description">Hands-on experience with personal and academic projects demonstrating practical coding skills.</p>
+      </div>
+    </div>
+    <div class="interactive-card" onclick="openModal('softSkills')">
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-icon">🤝</div>
+        <h3 class="card-title">Soft Skills</h3>
+        <p class="card-description">Strong communication, collaboration, and adaptability skills to thrive in team environments.</p>
       </div>
     </div>
   </div>
 
-  <!-- Modal Overlay -->
-  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
-    <div class="modal" onclick="event.stopPropagation()">
-      <button class="close-btn" onclick="closeModal()">&times;</button>
-      <div class="modal-header">
-        <div class="modal-icon" id="modalIcon">🚀</div>
-        <h2 class="modal-title" id="modalTitle">Technical Expertise</h2>
-      </div>
-      <div class="modal-content" id="modalContent">
-        <!-- Content will be dynamically loaded -->
+  <!-- Modal Container -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+      <button class="close-btn" aria-label="Close modal" onclick="closeModal()">&times;</button>
+      <div id="modalContent">
+        <!-- Dynamic modal content injected here -->
       </div>
     </div>
   </div>
 
   <script>
-    // Generate floating particles
-    function createParticles() {
-      const particlesContainer = document.getElementById('particles');
-      const particleCount = 50;
+    // Generate particles for background
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 40;
 
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        const size = Math.random() * 4 + 1;
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
-        particle.style.animationDelay = Math.random() * 15 + 's';
-        
-        particlesContainer.appendChild(particle);
-      }
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = random(8, 20);
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${random(0, 100)}vw`;
+      particle.style.top = `${random(100, 110)}vh`;
+      particle.style.animationDuration = `${random(15, 30)}s`;
+      particle.style.animationDelay = `${-random(0, 30)}s`;
+      particlesContainer.appendChild(particle);
     }
 
     // Modal content data
     const modalData = {
       expertise: {
         icon: '🚀',
-        title: 'Technical Expertise',
+        title: 'Technical Skills',
         content: `
-          <h3>Core Technologies</h3>
+          <p>I am proficient in:</p>
           <ul>
-            <li>Full-Stack Web Development (Django, Grails, Laravel)</li>
-            <li>Networking & Security</li>
+            <li>Java (OOP, data structures, and algorithms)</li>
+            <li>Python (scripting, automation, and web frameworks)</li>
+            <li>HTML5, CSS3, JavaScript (basic front-end development)</li>
+            <li>Version control with Git and GitHub</li>
+            <li>Understanding of software development lifecycle and debugging</li>
           </ul>
-          
-          <h3>Programming Languages</h3>
-          <ul>
-            <li>Python - Advanced Data Science & AI</li>
-            <li>Java - Enterprise Applications</li>
-          </ul>
-          
-          <h3>Networking & Infrastructure</h3>
-          <ul>
-            <li>Network Security & Protocol Analysis</li>
-            <li>Load Balancing & High Availability Systems</li>
-            <li>API Design & RESTful Services</li>
-          </ul>
+          <p>Currently expanding my knowledge in full-stack development and cloud services.</p>
         `
       },
       education: {
         icon: '🎓',
-        title: 'Education & Background',
+        title: 'Education',
         content: `
-          <h3>Academic Qualifications</h3>
+          <p>I hold a Bachelor's degree in Computer Science, where I developed a strong foundation in:</p>
           <ul>
-            <li><strong>Bachelor's Degree in Computer Engineering</strong><br>
-                Birzeit University - Palestine<br>
-                Focus: Software Engineering, Network Systems, AI</li>
-            <li><strong>Secondary Education</strong><br>
-                Deir Debwan High School<br>
-                Graduated with Excellence in softwares and A+</li>
+            <li>Software engineering principles</li>
+            <li>Data structures and algorithms</li>
+            <li>Database systems</li>
+            <li>Object-oriented programming</li>
+            <li>Collaborative project work and code reviews</li>
           </ul>
-          
         `
       },
-      profile: {
-        icon: '👨‍💻',
-        title: 'Professional Profile',
+      projects: {
+        icon: '💼',
+        title: 'Projects',
         content: `
-          <h3>About Me</h3>
+          <p>My projects include:</p>
           <ul>
-            <li><strong>Age:</strong> 22 years old</li>
-            <li><strong>Location:</strong> Palestine</li>
-            <li><strong>Experience:</strong> 3+ years in software development</li>
-            <li><strong>Languages:</strong> Arabic (Native), English (Fluent)</li>
+            <li><strong>Portfolio Website:</strong> A responsive personal website showcasing my skills and projects.</li>
+            <li><strong>Task Manager App:</strong> A Java-based desktop application to organize daily tasks.</li>
+            <li><strong>Python Automation Scripts:</strong> Scripts to automate data entry and file management tasks.</li>
+            <li><strong>University Group Projects:</strong> Collaborated on building a basic e-commerce website prototype.</li>
           </ul>
-          
-          <h3>Professional Summary</h3>
-          <p>Passionate Computer Engineer with a strong foundation in software development and networking. Specialized in creating scalable, efficient solutions that drive business success. Committed to continuous learning and staying at the forefront of technological innovation.</p>
-          
-          <h3>Key Strengths</h3>
+          <p>These projects helped me develop practical coding skills and experience with version control and teamwork.</p>
+        `
+      },
+      softSkills: {
+        icon: '🤝',
+        title: 'Soft Skills',
+        content: `
+          <p>In addition to technical skills, I bring strong interpersonal qualities that contribute to successful teamwork and project delivery:</p>
           <ul>
-            <li>Problem-solving and analytical thinking</li>
-            <li>Team collaboration and leadership</li>
-            <li>Adaptability to new technologies</li>
-            <li>Strong communication skills</li>
-            <li>Attention to detail and code quality</li>
+            <li><strong>Effective Communication:</strong> Able to convey technical concepts clearly to team members and stakeholders.</li>
+            <li><strong>Team Collaboration:</strong> Experience working in teams using agile methodologies, supporting a positive and productive environment.</li>
+            <li><strong>Adaptability:</strong> Quick to learn new tools, frameworks, and approaches to keep up with evolving technology.</li>
+            <li><strong>Problem-Solving:</strong> Analytical mindset to troubleshoot issues and devise practical solutions.</li>
+            <li><strong>Time Management:</strong> Capable of balancing multiple tasks and meeting deadlines efficiently.</li>
           </ul>
-          
-          <h3>Career Objectives</h3>
-          <ul>
-            <li>Lead innovative software development projects</li>
-            <li>Contribute to open-source community</li>
-            <li>Mentor upcoming developers</li>
-            <li>Build scalable enterprise solutions</li>
-          </ul>
+          <p>These skills enable me to contribute effectively in both independent and group work settings.</p>
         `
       }
     };
 
-    // Open modal function
-    function openModal(type) {
-      const modal = modalData[type];
-      if (!modal) return;
+    // Modal functionality
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalContent = document.getElementById('modalContent');
 
-      document.getElementById('modalIcon').textContent = modal.icon;
-      document.getElementById('modalTitle').textContent = modal.title;
-      document.getElementById('modalContent').innerHTML = modal.content;
-      
-      document.getElementById('modalOverlay').classList.add('active');
-      document.body.style.overflow = 'hidden';
+    function openModal(key) {
+      const data = modalData[key];
+      if (!data) return;
+
+      modalContent.innerHTML = `
+        <div class="modal-header">
+          <div class="modal-icon">${data.icon}</div>
+          <h2 class="modal-title" id="modalTitle">${data.title}</h2>
+        </div>
+        <div class="modal-content" id="modalDescription">${data.content}</div>
+      `;
+      modalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden'; // prevent background scroll
     }
 
-    // Close modal function
     function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('active');
-      document.body.style.overflow = 'auto';
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = ''; // restore scroll
     }
 
-    // Handle escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
+    // Close modal on overlay click
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
         closeModal();
       }
     });
 
-    // Initialize particles on load
-    window.addEventListener('load', function() {
-      createParticles();
-    });
-
-    // Add smooth scroll behavior
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
+    // Close modal on Esc key press
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        closeModal();
+      }
     });
   </script>
 </body>
