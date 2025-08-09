@@ -2,238 +2,632 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>About Me</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Portfolio - Software Engineer</title>
   <style>
-    /* Reset and base styles */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: linear-gradient(135deg, #1a1a1a, #333);
-      color: #fff;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(-45deg, #0f0f23, #1a1a2e, #16213e, #0f3460);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      color: #ffffff;
       min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated background particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #64b5f6, #42a5f5, #1e88e5);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      animation: slideInFromTop 1s ease-out;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: #b0bec5;
+      margin-bottom: 40px;
+      animation: slideInFromTop 1s ease-out 0.2s both;
+    }
+
+    /* Interactive Cards Container */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Interactive Card */
+    .interactive-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      height: 250px;
+      animation: slideInFromBottom 0.8s ease-out;
+    }
+
+    .interactive-card:nth-child(1) { animation-delay: 0.1s; }
+    .interactive-card:nth-child(2) { animation-delay: 0.2s; }
+    .interactive-card:nth-child(3) { animation-delay: 0.3s; }
+    .interactive-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .interactive-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(100, 181, 246, 0.5);
+    }
+
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(100, 181, 246, 0.2), rgba(30, 136, 229, 0.2));
+      transition: all 0.5s ease;
+      z-index: 1;
+    }
+
+    .interactive-card:hover .card-overlay {
+      left: 0;
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      align-items: center;
-    }
-    h1 {
-      margin-top: 40px;
-      font-size: 2.5rem;
-      letter-spacing: 1px;
-      animation: fadeInDown 1s ease forwards;
-    }
-
-    /* Doors container */
-    .doors-container {
-      display: flex;
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin: 60px 0;
-    }
-
-    /* Door styling */
-    .door {
-      width: 200px;
-      height: 350px;
-      background: linear-gradient(145deg, #5a3e2b, #3e2a1f);
-      border-radius: 10px;
-      position: relative;
-      cursor: pointer;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.4);
-      transform-style: preserve-3d;
-      perspective: 1000px;
-      transition: transform 0.5s ease;
-      overflow: hidden;
-    }
-    .door:hover {
-      transform: scale(1.05);
-    }
-    .door-panel {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(145deg, #8B4513, #A0522D);
-      border-radius: 10px;
-      transform-origin: left;
-      transition: transform 0.7s ease;
-      z-index: 2;
-    }
-    .door.open .door-panel {
-      transform: rotateY(-100deg);
-    }
-
-    /* Door label */
-    .door-number {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.2rem;
-      font-weight: bold;
       text-align: center;
-      padding: 15px;
-      z-index: 3;
+      padding: 30px;
     }
 
-    /* Modal background */
-    #modal-bg {
-      display: none;
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      opacity: 0.8;
+      transition: all 0.3s ease;
+    }
+
+    .interactive-card:hover .card-icon {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: #b0bec5;
+      line-height: 1.5;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
       position: fixed;
-      inset: 0;
-      background-color: rgba(0,0,0,0.6);
-      z-index: 10;
-      animation: fadeIn 0.3s ease forwards;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
     }
 
-    /* Modal content */
-    #info {
-      display: none;
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      background-color: #222;
-      color: #fff;
-      padding: 30px;
-      border-radius: 15px;
+      transform: translate(-50%, -50%) scale(0.7);
+      background: linear-gradient(135deg, rgba(15, 15, 35, 0.95), rgba(22, 33, 62, 0.95));
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 25px;
+      padding: 40px;
       max-width: 600px;
-      width: 80%;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      z-index: 20;
-      animation: popUp 0.4s ease forwards;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 1001;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    #info h2 {
-      margin-bottom: 15px;
-      font-size: 1.8rem;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      padding-bottom: 5px;
+
+    .modal-overlay.active .modal {
+      transform: translate(-50%, -50%) scale(1);
     }
-    #info p, #info ul {
-      font-size: 1rem;
-      line-height: 1.5;
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 30px;
     }
-    #close-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #ff5722;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+
+    .modal-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #64b5f6, #1e88e5);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .modal-content {
+      line-height: 1.6;
+      color: #e0e0e0;
+    }
+
+    .modal-content h3 {
+      color: #64b5f6;
+      margin: 20px 0 10px;
+      font-weight: 600;
+    }
+
+    .modal-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .modal-content li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .modal-content li:before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #64b5f6;
       font-weight: bold;
-      transition: background 0.3s ease;
     }
-    #close-btn:hover {
-      background: #e64a19;
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0.7;
+    }
+
+    .close-btn:hover {
+      opacity: 1;
+      transform: scale(1.1);
+      color: #ff5722;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #64b5f6, #1e88e5);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(100, 181, 246, 0.3);
     }
 
     /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes popUp {
-      from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .door {
-        width: 150px;
-        height: 250px;
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
       }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slideInFromTop {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInFromBottom {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 20px 40px;
+      }
+      
+      .cards-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .modal {
+        padding: 30px 25px;
+        margin: 20px;
+        width: calc(100% - 40px);
+      }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(100, 181, 246, 0.5);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(100, 181, 246, 0.7);
     }
   </style>
 </head>
 <body>
+  <!-- Animated Background Particles -->
+  <div class="particles" id="particles"></div>
 
-  <h1>Welcome to My Portfolio</h1>
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1 class="hero-title">Software Engineer Portfolio</h1>
+    <p class="hero-subtitle">Innovative Solutions • Modern Technology • Professional Excellence</p>
+  </div>
 
-  <div class="doors-container">
-    <div class="door" onclick="openDoor(this, 'certificates')">
-      <div class="door-panel"></div>
-      <div class="door-number">Certificates</div>
+  <!-- Interactive Cards -->
+  <div class="cards-container">
+    <div class="interactive-card" onclick="openModal('expertise')">
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-icon">🚀</div>
+        <h3 class="card-title">Technical Expertise</h3>
+        <p class="card-description">Advanced software development and networking solutions</p>
+      </div>
     </div>
-    <div class="door" onclick="openDoor(this, 'age')">
-      <div class="door-panel"></div>
-      <div class="door-number">Personal Information</div>
+
+    <div class="interactive-card" onclick="openModal('education')">
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-icon">🎓</div>
+        <h3 class="card-title">Education & Background</h3>
+        <p class="card-description">Computer Engineering expertise and academic achievements</p>
+      </div>
     </div>
-    <div class="door" onclick="openDoor(this, 'name')">
-      <div class="door-panel"></div>
-      <div class="door-number">Expertise</div>
+
+    <div class="interactive-card" onclick="openModal('certifications')">
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-icon">🏆</div>
+        <h3 class="card-title">Certifications</h3>
+        <p class="card-description">Professional certifications and training programs</p>
+      </div>
     </div>
-    <div class="door" onclick="openDoor(this, 'edu')">
-      <div class="door-panel"></div>
-      <div class="door-number">Education</div>
+
+    <div class="interactive-card" onclick="openModal('profile')">
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <div class="card-icon">👨‍💻</div>
+        <h3 class="card-title">Professional Profile</h3>
+        <p class="card-description">Personal information and career overview</p>
+      </div>
     </div>
   </div>
 
-  <div id="modal-bg" onclick="closeInfo()"></div>
-
-  <div id="info">
-    <h2 id="info-title"></h2>
-    <div id="info-content"></div>
-    <button id="close-btn" onclick="closeInfo()">Close</button>
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <div class="modal-header">
+        <div class="modal-icon" id="modalIcon">🚀</div>
+        <h2 class="modal-title" id="modalTitle">Technical Expertise</h2>
+      </div>
+      <div class="modal-content" id="modalContent">
+        <!-- Content will be dynamically loaded -->
+      </div>
+    </div>
   </div>
 
   <script>
-    function openDoor(element, section) {
-      element.classList.add('open');
+    // Generate floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
 
-      setTimeout(() => {
-        var infoTitle = document.getElementById('info-title');
-        var infoContent = document.getElementById('info-content');
-        var info = document.getElementById('info');
-        var modalBg = document.getElementById('modal-bg');
-
-        if (section === 'certificates') {
-          infoTitle.textContent = 'My Certificates';
-          infoContent.innerHTML = `
-            <ul>
-              <li>Certificate 1: Training for employee</li>
-              <li>Certificate 2: Coming Soon</li>
-              <li>Certificate 3: Coming Soon</li>
-            </ul>
-          `;
-        } else if (section === 'age') {
-          infoTitle.textContent = 'Personal Information';
-          infoContent.textContent = 'I am 22 years old.';
-        } else if (section === 'name') {
-          infoTitle.textContent = 'My Expertise';
-          infoContent.textContent = 'Expert in software development and networking.';
-        } else if (section === 'edu') {
-          infoTitle.textContent = 'My Education';
-          infoContent.innerHTML = `
-            <ul>
-              <li>Secondary School: Deir Debwan</li>
-              <li>Bachelor: Computer Engineering - Birzeit University</li>
-              <li>Other: Coming Soon</li>
-            </ul>
-          `;
-        }
-
-        modalBg.style.display = 'block';
-        info.style.display = 'block';
-      }, 700);
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const size = Math.random() * 4 + 1;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        
+        particlesContainer.appendChild(particle);
+      }
     }
 
-    function closeInfo() {
-      document.querySelectorAll('.door').forEach(d => d.classList.remove('open'));
-      document.getElementById('modal-bg').style.display = 'none';
-      document.getElementById('info').style.display = 'none';
+    // Modal content data
+    const modalData = {
+      expertise: {
+        icon: '🚀',
+        title: 'Technical Expertise',
+        content: `
+          <h3>Core Technologies</h3>
+          <ul>
+            <li>Full-Stack Web Development (React, Node.js, Express)</li>
+            <li>Advanced Software Architecture & Design Patterns</li>
+            <li>Cloud Computing (AWS, Azure, Docker)</li>
+            <li>Database Management (PostgreSQL, MongoDB, Redis)</li>
+            <li>DevOps & CI/CD Pipeline Implementation</li>
+          </ul>
+          
+          <h3>Programming Languages</h3>
+          <ul>
+            <li>JavaScript/TypeScript - Expert Level</li>
+            <li>Python - Advanced Data Science & AI</li>
+            <li>Java - Enterprise Applications</li>
+            <li>C++ - System Programming</li>
+            <li>Go - Microservices & Backend</li>
+          </ul>
+          
+          <h3>Networking & Infrastructure</h3>
+          <ul>
+            <li>Network Security & Protocol Analysis</li>
+            <li>Load Balancing & High Availability Systems</li>
+            <li>API Design & RESTful Services</li>
+            <li>Microservices Architecture</li>
+          </ul>
+        `
+      },
+      education: {
+        icon: '🎓',
+        title: 'Education & Background',
+        content: `
+          <h3>Academic Qualifications</h3>
+          <ul>
+            <li><strong>Bachelor's Degree in Computer Engineering</strong><br>
+                Birzeit University - Palestine<br>
+                Focus: Software Engineering, Network Systems, AI</li>
+            <li><strong>Secondary Education</strong><br>
+                Deir Debwan High School<br>
+                Graduated with Excellence in Mathematics & Sciences</li>
+          </ul>
+          
+          <h3>Specialized Training</h3>
+          <ul>
+            <li>Advanced Algorithms & Data Structures</li>
+            <li>Machine Learning & Artificial Intelligence</li>
+            <li>Cybersecurity & Network Protection</li>
+            <li>Agile Development Methodologies</li>
+            <li>Cloud Architecture & Deployment</li>
+          </ul>
+          
+          <h3>Research Interests</h3>
+          <ul>
+            <li>Artificial Intelligence in Software Development</li>
+            <li>Distributed Systems & Blockchain Technology</li>
+            <li>IoT Security & Edge Computing</li>
+          </ul>
+        `
+      },
+      certifications: {
+        icon: '🏆',
+        title: 'Professional Certifications',
+        content: `
+          <h3>Current Certifications</h3>
+          <ul>
+            <li><strong>Professional Employee Training Certificate</strong><br>
+                Industry best practices and professional development</li>
+          </ul>
+          
+          <h3>In Progress</h3>
+          <ul>
+            <li>AWS Solutions Architect Professional</li>
+            <li>Google Cloud Professional Developer</li>
+            <li>Certified Kubernetes Administrator (CKA)</li>
+            <li>CompTIA Security+ Certification</li>
+          </ul>
+          
+          <h3>Planned Certifications 2024</h3>
+          <ul>
+            <li>Microsoft Azure Developer Associate</li>
+            <li>Cisco Certified Network Professional (CCNP)</li>
+            <li>Certified Ethical Hacker (CEH)</li>
+            <li>Docker Certified Associate</li>
+          </ul>
+          
+          <h3>Professional Development</h3>
+          <ul>
+            <li>Continuous learning through online platforms</li>
+            <li>Open source contributions on GitHub</li>
+            <li>Tech conference participation and networking</li>
+          </ul>
+        `
+      },
+      profile: {
+        icon: '👨‍💻',
+        title: 'Professional Profile',
+        content: `
+          <h3>About Me</h3>
+          <ul>
+            <li><strong>Age:</strong> 22 years old</li>
+            <li><strong>Location:</strong> Palestine</li>
+            <li><strong>Experience:</strong> 3+ years in software development</li>
+            <li><strong>Languages:</strong> Arabic (Native), English (Fluent)</li>
+          </ul>
+          
+          <h3>Professional Summary</h3>
+          <p>Passionate Computer Engineer with a strong foundation in software development and networking. Specialized in creating scalable, efficient solutions that drive business success. Committed to continuous learning and staying at the forefront of technological innovation.</p>
+          
+          <h3>Key Strengths</h3>
+          <ul>
+            <li>Problem-solving and analytical thinking</li>
+            <li>Team collaboration and leadership</li>
+            <li>Adaptability to new technologies</li>
+            <li>Strong communication skills</li>
+            <li>Attention to detail and code quality</li>
+          </ul>
+          
+          <h3>Career Objectives</h3>
+          <ul>
+            <li>Lead innovative software development projects</li>
+            <li>Contribute to open-source community</li>
+            <li>Mentor upcoming developers</li>
+            <li>Build scalable enterprise solutions</li>
+          </ul>
+        `
+      }
+    };
+
+    // Open modal function
+    function openModal(type) {
+      const modal = modalData[type];
+      if (!modal) return;
+
+      document.getElementById('modalIcon').textContent = modal.icon;
+      document.getElementById('modalTitle').textContent = modal.title;
+      document.getElementById('modalContent').innerHTML = modal.content;
+      
+      document.getElementById('modalOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
+
+    // Close modal function
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Handle escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Initialize particles on load
+    window.addEventListener('load', function() {
+      createParticles();
+    });
+
+    // Add smooth scroll behavior
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
   </script>
-
 </body>
 </html>
