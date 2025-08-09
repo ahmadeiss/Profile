@@ -4,217 +4,234 @@
   <meta charset="UTF-8">
   <title>About Me</title>
   <style>
-    /* CSS Styles */
-
-    /* Reset default margins and paddings */
+    /* Reset and base styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      color: #fff;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      text-align: center;
+      align-items: center;
     }
-
     h1 {
-      margin-top: 50px;
-      color: #333;
+      margin-top: 40px;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+      animation: fadeInDown 1s ease forwards;
     }
 
+    /* Doors container */
     .doors-container {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      flex-grow: 1;
-      margin: 50px 0;
+      gap: 30px;
+      margin: 60px 0;
     }
 
+    /* Door styling */
     .door {
       width: 200px;
       height: 350px;
-      margin: 20px;
-      background-color: #8B4513; /* Brown color */
+      background: linear-gradient(145deg, #5a3e2b, #3e2a1f);
+      border-radius: 10px;
       position: relative;
       cursor: pointer;
-      border: 2px solid #654321;
-      border-radius: 5px;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      transition: transform 0.5s ease;
       overflow: hidden;
-      transition: transform 0.3s;
     }
-
     .door:hover {
       transform: scale(1.05);
     }
-
-    .door::before {
-      content: '';
+    .door-panel {
       position: absolute;
-      width: 190px;
-      height: 340px;
-      top: 5px;
-      left: 5px;
-      background-color: #A0522D; /* Sienna color */
-      border-radius: 3px;
+      inset: 0;
+      background: linear-gradient(145deg, #8B4513, #A0522D);
+      border-radius: 10px;
+      transform-origin: left;
+      transition: transform 0.7s ease;
+      z-index: 2;
+    }
+    .door.open .door-panel {
+      transform: rotateY(-100deg);
     }
 
+    /* Door label */
     .door-number {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 28px;
-      color: #fff;
-      z-index: 1;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: bold;
       text-align: center;
-      width: 90%;
-      word-wrap: break-word;
-    }
-
-    #info {
-      display: none;
-      margin: 50px auto;
-      width: 80%;
-      max-width: 600px;
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-      text-align: left;
-      position: relative;
-      z-index: 20;
-    }
-
-    #info h2 {
-      margin-top: 0;
-    }
-
-    #close-btn {
-      display: block;
-      margin: 20px auto 0;
-      padding: 10px 20px;
-      background-color: #333;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-
-    #close-btn:hover {
-      background-color: #555;
+      padding: 15px;
+      z-index: 3;
     }
 
     /* Modal background */
     #modal-bg {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5);
+      inset: 0;
+      background-color: rgba(0,0,0,0.6);
       z-index: 10;
+      animation: fadeIn 0.3s ease forwards;
     }
 
-    /* Responsive Design */
+    /* Modal content */
+    #info {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      background-color: #222;
+      color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 80%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      z-index: 20;
+      animation: popUp 0.4s ease forwards;
+    }
+    #info h2 {
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding-bottom: 5px;
+    }
+    #info p, #info ul {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    #close-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff5722;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    #close-btn:hover {
+      background: #e64a19;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popUp {
+      from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
       .door {
         width: 150px;
         height: 250px;
       }
-
-      .door::before {
-        width: 140px;
-        height: 240px;
-      }
-
-      .door-number {
-        font-size: 24px;
-      }
     }
-
   </style>
 </head>
 <body>
 
-  <h1>Welcome</h1>
+  <h1>Welcome to My Portfolio</h1>
 
   <div class="doors-container">
-    <div class="door" onclick="openDoor('certificates')">
+    <div class="door" onclick="openDoor(this, 'certificates')">
+      <div class="door-panel"></div>
       <div class="door-number">Certificates</div>
     </div>
-    <div class="door" onclick="openDoor('age')">
+    <div class="door" onclick="openDoor(this, 'age')">
+      <div class="door-panel"></div>
       <div class="door-number">Personal Information</div>
     </div>
-    <div class="door" onclick="openDoor('name')">
-      <div class="door-number">Experts</div>
+    <div class="door" onclick="openDoor(this, 'name')">
+      <div class="door-panel"></div>
+      <div class="door-number">Expertise</div>
     </div>
-    <div class="door" onclick="openDoor('edu')">
-      <div class="door-number">Educational</div>
+    <div class="door" onclick="openDoor(this, 'edu')">
+      <div class="door-panel"></div>
+      <div class="door-number">Education</div>
     </div>
-    <!-- Add more doors as needed -->
   </div>
 
-  <div id="modal-bg"></div>
+  <div id="modal-bg" onclick="closeInfo()"></div>
 
   <div id="info">
-    <!-- Information will be displayed here -->
     <h2 id="info-title"></h2>
-    <p id="info-content"></p>
-    <a href="#" id="close-btn" onclick="closeInfo()">Close</a>
+    <div id="info-content"></div>
+    <button id="close-btn" onclick="closeInfo()">Close</button>
   </div>
 
   <script>
-    // JavaScript code
-    function openDoor(section) {
-      var infoTitle = document.getElementById('info-title');
-      var infoContent = document.getElementById('info-content');
-      var info = document.getElementById('info');
-      var modalBg = document.getElementById('modal-bg');
+    function openDoor(element, section) {
+      element.classList.add('open');
 
-      if (section === 'certificates') {
-        infoTitle.textContent = 'My Certificates';
-        infoContent.innerHTML = `
-          <ul>
-            <li>Certificate 1: Training for employee</li>
-            <li>Certificate 2: Coming Soon</li>
-            <li>Certificate 3: Coming Soon</li>
-          </ul>
-        `;
-      } else if (section === 'age') {
-        infoTitle.textContent = 'Personal Information';
-        infoContent.textContent = 'I am 22 years old.';
-      } else if (section === 'name') {
-        infoTitle.textContent = 'My Expertise';
-        infoContent.textContent = 'Expert in software development and networking.';
-      } else if (section === 'edu') {
-        infoTitle.textContent = 'My Education';
-        infoContent.innerHTML = `
-          <ul>
-            <li>1st: Secondary School from Deir Debwan</li>
-            <li>2nd: Computer Engineering from Birzeit University</li>
-            <li>3rd: Coming Soon</li>
-          </ul>
-        `;
-      }
-      // Add more sections as needed
+      setTimeout(() => {
+        var infoTitle = document.getElementById('info-title');
+        var infoContent = document.getElementById('info-content');
+        var info = document.getElementById('info');
+        var modalBg = document.getElementById('modal-bg');
 
-      info.style.display = 'block';
-      modalBg.style.display = 'block';
+        if (section === 'certificates') {
+          infoTitle.textContent = 'My Certificates';
+          infoContent.innerHTML = `
+            <ul>
+              <li>Certificate 1: Training for employee</li>
+              <li>Certificate 2: Coming Soon</li>
+              <li>Certificate 3: Coming Soon</li>
+            </ul>
+          `;
+        } else if (section === 'age') {
+          infoTitle.textContent = 'Personal Information';
+          infoContent.textContent = 'I am 22 years old.';
+        } else if (section === 'name') {
+          infoTitle.textContent = 'My Expertise';
+          infoContent.textContent = 'Expert in software development and networking.';
+        } else if (section === 'edu') {
+          infoTitle.textContent = 'My Education';
+          infoContent.innerHTML = `
+            <ul>
+              <li>Secondary School: Deir Debwan</li>
+              <li>Bachelor: Computer Engineering - Birzeit University</li>
+              <li>Other: Coming Soon</li>
+            </ul>
+          `;
+        }
+
+        modalBg.style.display = 'block';
+        info.style.display = 'block';
+      }, 700);
     }
 
     function closeInfo() {
-      var info = document.getElementById('info');
-      var modalBg = document.getElementById('modal-bg');
-
-      info.style.display = 'none';
-      modalBg.style.display = 'none';
+      document.querySelectorAll('.door').forEach(d => d.classList.remove('open'));
+      document.getElementById('modal-bg').style.display = 'none';
+      document.getElementById('info').style.display = 'none';
     }
   </script>
 
